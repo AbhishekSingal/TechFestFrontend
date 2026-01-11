@@ -41,11 +41,14 @@ const App = () => {
   const handleAuth = async () => {
     const endpoint = isSignup ? "/api/register" : "/api/login";
     try {
-      const res = await fetch(`http://127.0.0.1:5001${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `techfestbackend-production.up.railway.app${endpoint}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         if (isSignup) {
@@ -79,11 +82,14 @@ const App = () => {
     if (registered.includes(event.id)) return;
     setIsProcessing(event.id);
     try {
-      const res = await fetch("http://127.0.0.1:5001/api/book", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, eventId: event.id }),
-      });
+      const res = await fetch(
+        "techfestbackend-production.up.railway.app/api/book",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, eventId: event.id }),
+        }
+      );
       if (res.ok) {
         setRegistered([...registered, event.id]);
         setShowModal(event);

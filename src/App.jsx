@@ -42,7 +42,7 @@ const App = () => {
     const endpoint = isSignup ? "/api/register" : "/api/login";
     try {
       const res = await fetch(
-        `techfestbackend-production.up.railway.app${endpoint}`,
+        `https://techfestbackend-production.up.railway.app${endpoint}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -83,7 +83,7 @@ const App = () => {
     setIsProcessing(event.id);
     try {
       const res = await fetch(
-        "techfestbackend-production.up.railway.app/api/book",
+        "https://techfestbackend-production.up.railway.app/api/book",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

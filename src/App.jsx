@@ -39,17 +39,27 @@ const App = () => {
   }, [token]);
 
   const handleAuth = async () => {
-    const endpoint = isSignup ? "/api/register" : "/api/login";
+    // 1. Force the domain to be a clean constant
+    const BACKEND_DOMAIN = "https://techfestbackend-production.up.railway.app";
+    const path = isSignup ? "/api/register" : "/api/login";
+    
+    // 2. Combine them safely
+    const finalUrl = `${BACKEND_DOMAIN}${path}`;
+
     try {
-      const res = await fetch(
-        `https://techfestbackend-production.up.railway.app${endpoint}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      console.log("Attempting request to:", finalUrl); // This will show in your console
+      
+      const res = await fetch(finalUrl, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(formData),
+      });
+
       const data = await res.json();
+
       if (res.ok) {
         if (isSignup) {
           alert("Registration Successful! Please Sign In.");
@@ -63,10 +73,11 @@ const App = () => {
           setIsLoggedIn(true);
         }
       } else {
-        alert(data.error);
+        alert(data.error || "Auth Failed");
       }
     } catch (err) {
-      alert("Backend Offline");
+      console.error("DETAILED ERROR:", err);
+      alert("Backend Offline. Check Console for URL.");
     }
   };
 

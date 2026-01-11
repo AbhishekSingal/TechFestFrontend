@@ -42,18 +42,18 @@ const App = () => {
     // 1. Force the domain to be a clean constant
     const BACKEND_DOMAIN = "https://techfestbackend-production.up.railway.app";
     const path = isSignup ? "/api/register" : "/api/login";
-    
+
     // 2. Combine them safely
     const finalUrl = `${BACKEND_DOMAIN}${path}`;
 
     try {
       console.log("Attempting request to:", finalUrl); // This will show in your console
-      
+
       const res = await fetch(finalUrl, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -121,7 +121,7 @@ const App = () => {
             <Zap size={40} fill="currentColor" />
           </div>
           <h1 className="text-3xl font-black text-center mb-6 tracking-tighter uppercase italic">
-            Tryst Portal
+            TechFest Portal
           </h1>
           <div className="space-y-4">
             {isSignup && (
